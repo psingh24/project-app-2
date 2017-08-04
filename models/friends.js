@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         }
     });
+    console.log(friends);
 
     // friends.associate = function(models) {
     //     friends.belongsTo(models.user, {
