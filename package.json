@@ -1,0 +1,15 @@
+{
+  "name": "allyall",
+  "version": "1.0.0",
+  "description": "App to suggest places to eat, drinks and enjoy in your preferences.",
+  "scripts": {
+    "start": "harp server --port $PORT"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "handlebars": "^4.0.10",
+    "harp": "^0.24.0",
+    "mysql2": "^1.4.0",
+    "sequelize": "^4.4.2"
+  }
+}
