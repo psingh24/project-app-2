@@ -2,7 +2,8 @@
     "development": {
         "username": "root",
         "password": "root",
-        "database": "hey_yall_db",
+        "port": "8889",
+        "database": "project2_db",
         "host": "localhost",
         "dialect": "mysql"
     },
