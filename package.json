@@ -1,10 +1,21 @@
 {
-  "name": "allyall",
+  "name": "projectapptwo",
   "version": "1.0.0",
-  "description": "App to suggest places to eat, drinks and enjoy in your preferences.",
+  "description": "handlebars + MySQL app",
+  "main": "server.js",
   "scripts": {
-    "start": "harp server --port $PORT"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psingh24/project-app-2"
+  },
+  "author": "Prabhdeep Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psingh24/project-app-2/issues"
+  },
+  "homepage": "https://github.com/psingh24/project-app-2#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "express": "^4.15.3",

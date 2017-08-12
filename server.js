@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-app.use(expressValidator()); // this line must be immediately after any of the bodyParser middlewares!
+app.use(expressValidator()); // this line must be immediately aftgit aer any of the bodyParser middlewares!
 
 // var sessionStore = new MySQLStore(config.mySQLKeys);
 
