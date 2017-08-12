@@ -62,7 +62,7 @@ app.use(session({
     resave: false,
     store: sessionStore,
     saveUninitialized: false,
-    //   cookie: { secure: true }
+      cookie: { secure: true }
 }));
 
 //init passport-- also test if user is logged in
