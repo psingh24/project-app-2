@@ -12,25 +12,30 @@
 		<a id="join" class="waves-effect waves-light btn" href="">Join</a>
 
 		<div class="row">
-            <div class="col-md-12">
-			    <div class="col-md-4">
-                    <div class="event-info">
+			<div class="col m3">
+				<div class="card">
+					<div class="card-image">
+						<img src="http://via.placeholder.com/250x250">
+						<span class="card-title">Group Outing</span>
+					</div>
+					<div class="card-content">
                         {{#each meetup}} 
                             <p>{{this.eventName}}<p>
                             <p>{{this.date}}<p>
                             <p>{{this.totalAttendees}}<p>   
                         {{/each}} 
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-content black-text">
-                            <span class="card-title">Members</span>
-                            {{#each members}} 
-                            <img class="center" src=""+image"">
-                                <p{{this.name}}<p>   
-                            {{/each}} 
-                        </div>
-                    </div>
+					</div>
+				</div>
+			
+				<div class="card">
+					<div class="card-content black-text">
+						<span class="card-title">Members</span>
+                         {{#each members}} 
+						<img class="center" src=""+image"">
+                            <p{{this.name}}<p>   
+                         {{/each}} 
+					</div>
+				</div>
 
 			</div>
 
@@ -48,8 +53,9 @@
                         </div>
                     </div>
                     <div class="card-action flex">
-                        <i class="block medium material-icons">thumb_up</i>
-                        <i class="block medium material-icons">thumb_down</i>
+                        <input type="image" src="" alt="Submit">
+                        <input type="image" src="" alt="Submit">
+                        {{!-- <i class="block medium material-icons">thumb_down</i> --}}
                     </div>
                     </div>
                 </div>

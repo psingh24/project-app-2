@@ -13,8 +13,7 @@ var expressValidator = require('express-validator');
 var mysql = require("mysql");
 var config = require("./db.js");
 
-var connection = mysql.createConnection(config.mySQLKeys);
-
+// var connection = mysql.createConnection(config.mySQLKeys);
 
 //Authentication packages
 var session = require("express-session");
@@ -49,15 +48,17 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 app.use(expressValidator()); // this line must be immediately after any of the bodyParser middlewares!
 
-var sessionStore = new MySQLStore(config.mySQLKeys);
+// var sessionStore = new MySQLStore(config.mySQLKeys);
+
+var sessionStore = new MySQLStore(process.env.JAWSDB_URL);
 
 //session handling
 app.use(session({
-  secret: 'jehrfgejrhfge',
-  resave: false,
-  store: sessionStore,
-  saveUninitialized: false,
-//   cookie: { secure: true }
+    secret: 'jehrfgejrhfge',
+    resave: false,
+    store: sessionStore,
+    saveUninitialized: false,
+    //   cookie: { secure: true }
 }));
 
 //init passport-- also test if user is logged in
@@ -66,7 +67,7 @@ app.use(passport.session());
 
 // Handlebars
 var exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 
@@ -83,32 +84,57 @@ require("./migrations/api-routes.js")(app);
 
 //=======================================================//
 
+// passport.use(new LocalStrategy(
+//     function(username, password, done) {
+//         console.log(username, password);
+
+
+
+//         connection.query("SELECT id, password FROM users WHERE userName = ?", [username], function(err, results, fields) {
+//             if (err) done(err)
+//                 // console.log(results)
+
+//             if (results.length === 0) {
+//                 done(null, false)
+//             } else {
+//                 var hash = results[0].password.toString();
+
+//                 bcrypt.compare(password, hash, function(err, response) {
+//                     if (response === true) {
+//                         return done(null, [results[0].id, username]);
+//                     } else {
+//                         done(null, false)
+//                     }
+//                 })
+//             }
+//         })
+//     }
+// ));
+
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-    console.log(username, password);
+    function(username, password, done) {
+        console.log(username, password);
 
-
-
-    connection.query("SELECT id, password FROM users WHERE userName = ?", [username], function(err, results, fields){
-            if (err) done(err)
-                // console.log(results)
+        db.user.findOne({ where: { userName: username } }).then(function(results) {
+            console.log(results)
 
             if (results.length === 0) {
                 done(null, false)
+            } else {
+                var hash = results.password.toString();
+
+                bcrypt.compare(password, hash, function(err, response) {
+                    if (response === true) {
+                        return done(null, [results.id, username]);
+                    } else {
+                        done(null, false)
+                    }
+                })
             }
-            else {
-                  var hash = results[0].password.toString();
-           
-            bcrypt.compare(password, hash, function(err, response) {
-                if (response === true) {
-                    return done(null, [results[0].id, username]);
-                } else {
-                    done(null, false)
-                }
-            })
-            }
-    })
-  }
+        })
+
+
+    }
 ));
 
 
