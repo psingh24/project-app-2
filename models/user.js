@@ -1,19 +1,28 @@
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define("user", {
-        name: DataTypes.STRING,
+    var user = sequelize.define("user", {
+        userName: DataTypes.STRING,
         email: DataTypes.STRING,
-        password: DataTypes.STRING
+        password: DataTypes.STRING,
+        image: {
+          type: DataTypes.STRING(30),
+          allowNull: false,
+          defaultValue: 'random.PNG'
+        }
     });
 
-    user.hasMany(
-        preferences, { forgeignKey: "preferences_id" },
-        friends, { forgeignKey: "friends_id" }
-    );
+    user.associate = function(models) {
+        user.hasMany(
+            models.relationships, { 
+                forgeignKey: "userID",
+                onDelete: "cascade"
+            })
+        user.hasMany(
+            models.preferences, { 
+                forgeignKey: "userID", 
+                onDelete: "cascade"
+            })
+        user.belongsToMany(models.event, {through: 'eventMembers'})
 
-    // user.associate = function(models) {
-    //     user.hasMany(models.preferences, models.friends, {
-    //         onDelete: "cascade"
-    //     });
-    //     return user;
-    // };
+    };
+    return user;
 };
