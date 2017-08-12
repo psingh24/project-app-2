@@ -50,7 +50,11 @@ app.use(expressValidator()); // this line must be immediately after any of the b
 
 // var sessionStore = new MySQLStore(config.mySQLKeys);
 
-var sessionStore = new MySQLStore(process.env.JAWSDB_URL);
+if (process.env.JAWSDB_url) {
+    var sessionStore = new MySQLStore(process.env.JAWSDB_URL);
+} else {
+    var sessionStore = new MySQLStore(config.mySQLKeys);
+}
 
 //session handling
 app.use(session({
